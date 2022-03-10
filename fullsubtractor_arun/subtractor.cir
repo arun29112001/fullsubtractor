@@ -1,0 +1,23 @@
+* C:\Users\HP\eSim-Workspace\subtractor\subtractor.cir
+
+* EESchema Netlist Version 1.1 (Spice format) creation date: 3/4/2022 5:28:28 PM
+
+* To exclude a component from the Spice Netlist add [Spice_Netlist_Enabled] user FIELD set to: N
+* To reorder the component spice node sequence add [Spice_Node_Sequence] user FIELD and define sequence: 2,1,0
+
+* Sheet Name: /
+X1  Net-_U6-Pad4_ Net-_U6-Pad5_ Net-_U6-Pad6_ Net-_U7-Pad1_ Net-_U7-Pad2_ full_sub		
+v1  int1 GND DC		
+v2  int2 GND DC		
+v3  int3 GND DC		
+U6  int1 int2 int3 Net-_U6-Pad4_ Net-_U6-Pad5_ Net-_U6-Pad6_ adc_bridge_3		
+U7  Net-_U7-Pad1_ Net-_U7-Pad2_ dif borrow dac_bridge_2		
+U4  dif plot_v1		
+U5  borrow plot_v1		
+U1  int1 plot_v1		
+U2  int2 plot_v1		
+U3  int3 plot_v1		
+R2  borrow GND 1k		
+R1  dif GND 1k		
+
+.end

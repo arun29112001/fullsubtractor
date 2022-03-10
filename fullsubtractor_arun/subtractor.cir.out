@@ -1,0 +1,36 @@
+* c:\users\hp\esim-workspace\subtractor\subtractor.cir
+
+.include full_sub.sub
+x1 net-_u6-pad4_ net-_u6-pad5_ net-_u6-pad6_ net-_u7-pad1_ net-_u7-pad2_ full_sub
+v1 int1 gnd  dc 5
+v2 int2 gnd  dc 4
+v3 int3 gnd  dc 3
+* u6  int1 int2 int3 net-_u6-pad4_ net-_u6-pad5_ net-_u6-pad6_ adc_bridge_3
+* u7  net-_u7-pad1_ net-_u7-pad2_ dif borrow dac_bridge_2
+* u4  dif plot_v1
+* u5  borrow plot_v1
+* u1  int1 plot_v1
+* u2  int2 plot_v1
+* u3  int3 plot_v1
+r2  borrow gnd 1k
+r1  dif gnd 1k
+a1 [int1 int2 int3 ] [net-_u6-pad4_ net-_u6-pad5_ net-_u6-pad6_ ] u6
+a2 [net-_u7-pad1_ net-_u7-pad2_ ] [dif borrow ] u7
+* Schematic Name:                             adc_bridge_3, NgSpice Name: adc_bridge
+.model u6 adc_bridge(in_low=1.0 in_high=2.0 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_2, NgSpice Name: dac_bridge
+.model u7 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+.tran 10e-00 100e-00 0e-00
+
+* Control Statements 
+.control
+run
+print allv > plot_data_v.txt
+print alli > plot_data_i.txt
+plot v(dif)
+plot v(borrow)
+plot v(int1)
+plot v(int2)
+plot v(int3)
+.endc
+.end
